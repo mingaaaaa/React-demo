@@ -1,8 +1,8 @@
 /*
  * @Author: yangming.zhang yangming.zhang@epichust.com
  * @Date: 2022-06-20 23:07:16
- * @LastEditors: yangming.zhang yangming.zhang@epichust.com
- * @LastEditTime: 2022-06-21 00:59:11
+ * @LastEditors: your name
+ * @LastEditTime: 2022-06-21 10:03:06
  * @FilePath: \React-demo\src\redux-view\views\01View.jsx
  * @Description: 
  * 
@@ -14,22 +14,16 @@ import { NavLink } from "react-router-dom";
 
 function Demo() {
   const [double, setDouble] = useState(store.getState().num * 2);
-  store.subscribe(() => {
-    console.log(123);
-    setDouble(store.getState().num * 2);
-  });
   /**
    * @description: 取消订阅
    * @return {*}
    */
   useEffect(() => {
     console.log("我被创建了");
-    let unsubscribe = () => {
-      console.log("取消订阅");
-      store.subscribe(() => {
-        console.log(store.getState());
-      })();
-    };
+    const unsubscribe = store.subscribe(() => {
+      console.log('监听ing:', store.getState());
+      console.log(123);
+    });
     return () => {
       console.log("我被销毁了");
       unsubscribe();
